@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { beepLastCount, beepShort } from "./sound";
 
 type Player = 1 | 2;
 
@@ -88,11 +89,26 @@ export const useGameStore = create<GameState>()(
           state.activePlayer === 1 ? "player1Byoyomi" : "player2Byoyomi";
 
         if (state[timeKey] > 0) {
-          set({ [timeKey]: state[timeKey] - 1 });
+          const newTime = state[timeKey] - 1;
+          set({ [timeKey]: newTime });
+
+          // Beep when main time drops below 1 minute
+          if (newTime === 59) {
+            beepShort();
+          }
         } else if (state[byoyomiKey] > 0) {
-          set({ [byoyomiKey]: state[byoyomiKey] - 1 });
+          const newByoyomi = state[byoyomiKey] - 1;
+          set({ [byoyomiKey]: newByoyomi });
+
+          // Byoyomi sounds
+          if (newByoyomi > 0 && newByoyomi <= 10 && newByoyomi % 10 === 0) {
+            // Every 10 seconds (50, 40, 30, 20, 10)
+            beepShort();
+          } else if (newByoyomi > 0 && newByoyomi < 10) {
+            // Last count: every second under 10
+            beepLastCount();
+          }
         }
-        // When byoyomi reaches 0, time is up (player loses on time)
       },
 
       pause: () => {
