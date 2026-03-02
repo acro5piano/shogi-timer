@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGameStore } from "../store";
+import { testSound } from "../sound";
 
 function TimeInput({
   label,
@@ -96,6 +97,13 @@ export function SettingsMenu({ onClose }: { onClose: () => void }) {
         />
 
         <div className="settings-actions">
+          <button
+            type="button"
+            className="settings-btn"
+            onClick={testSound}
+          >
+            サウンドテスト
+          </button>
           <button
             type="button"
             className="settings-btn danger"

@@ -23,9 +23,22 @@ export function beep(frequency = 800, duration = 100): void {
     oscillator.start(ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration / 1000);
     oscillator.stop(ctx.currentTime + duration / 1000);
-  } catch {
-    // Audio not available
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e);
+    alert(`音声の再生に失敗しました: ${message}`);
   }
+}
+
+export function testSound(): void {
+  try {
+    getAudioContext();
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e);
+    alert(`AudioContextの作成に失敗しました: ${message}`);
+    return;
+  }
+  beepShort();
+  setTimeout(() => beepLastCount(), 300);
 }
 
 export function beepShort(): void {
