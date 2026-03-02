@@ -51,8 +51,6 @@ export function SettingsMenu({ onClose }: { onClose: () => void }) {
   const initialTimeSeconds = useGameStore((s) => s.initialTimeSeconds);
   const byoyomiSeconds = useGameStore((s) => s.byoyomiSeconds);
   const turnCount = useGameStore((s) => s.turnCount);
-  const pause = useGameStore((s) => s.pause);
-  const resume = useGameStore((s) => s.resume);
   const initialize = useGameStore((s) => s.initialize);
   const setInitialTime = useGameStore((s) => s.setInitialTime);
   const setByoyomi = useGameStore((s) => s.setByoyomi);
@@ -98,30 +96,6 @@ export function SettingsMenu({ onClose }: { onClose: () => void }) {
         />
 
         <div className="settings-actions">
-          {gameStatus === "running" && (
-            <button
-              type="button"
-              className="settings-btn"
-              onClick={() => {
-                pause();
-                onClose();
-              }}
-            >
-              一時停止
-            </button>
-          )}
-          {gameStatus === "paused" && (
-            <button
-              type="button"
-              className="settings-btn"
-              onClick={() => {
-                resume();
-                onClose();
-              }}
-            >
-              再開
-            </button>
-          )}
           <button
             type="button"
             className="settings-btn danger"

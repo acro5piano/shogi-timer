@@ -49,6 +49,21 @@ body,
   background: linear-gradient(to bottom, #c8e4ff, #a8d0f0);
 }
 
+.pause-btn {
+  padding: 6px 24px;
+  font-size: 16px;
+  border: 2px solid #ee9b6c;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #fff4e8, #ffe4c8);
+  color: #dd6a1a;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pause-btn:active {
+  background: linear-gradient(to bottom, #ffe4c8, #f0d0a8);
+}
+
 .turn-count {
   color: #ccc;
   font-size: 14px;

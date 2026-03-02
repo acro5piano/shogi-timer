@@ -8,6 +8,8 @@ export function App() {
   const tick = useGameStore((s) => s.tick);
   const gameStatus = useGameStore((s) => s.gameStatus);
   const turnCount = useGameStore((s) => s.turnCount);
+  const pause = useGameStore((s) => s.pause);
+  const resume = useGameStore((s) => s.resume);
 
   useEffect(() => {
     if (gameStatus !== "running") return;
@@ -25,6 +27,16 @@ export function App() {
         >
           設定
         </button>
+        {gameStatus === "running" && (
+          <button type="button" className="pause-btn" onClick={pause}>
+            一時停止
+          </button>
+        )}
+        {gameStatus === "paused" && (
+          <button type="button" className="pause-btn" onClick={resume}>
+            再開
+          </button>
+        )}
         <span className="turn-count">手数: {turnCount}</span>
       </div>
 
