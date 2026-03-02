@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useGameStore } from "../store";
 
 function formatTime(seconds: number): string {
@@ -18,17 +19,18 @@ export function TimerPanel({ player }: { player: 1 | 2 }) {
   const switchTurn = useGameStore((s) => s.switchTurn);
 
   const isActive = activePlayer === player && gameStatus === "running";
+  const isInactive = activePlayer !== null && activePlayer !== player && gameStatus === "running";
   const isTimeUp = mainTime <= 0 && byoyomi <= 0;
-
-  const handleClick = () => {
-    switchTurn(player);
-  };
 
   return (
     <button
       type="button"
-      className={`timer-panel player-${player} ${isActive ? "active" : ""} ${isTimeUp ? "time-up" : ""}`}
-      onClick={handleClick}
+      className={clsx("timer-panel", {
+        active: isActive,
+        inactive: isInactive,
+        "time-up": isTimeUp,
+      })}
+      onClick={() => switchTurn(player)}
     >
       <div className="time-display">
         <span className="main-time">{formatTime(mainTime)}</span>

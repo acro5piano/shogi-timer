@@ -9,8 +9,9 @@ body,
 #root {
   height: 100%;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   background: #3a3a3a;
   user-select: none;
   -webkit-user-select: none;
@@ -93,31 +94,20 @@ body,
   padding: 16px;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
-  transition: filter 0.15s;
+  background: #e8e8e0;
+  transition: background 0.15s;
 }
 
 .timer-panel:active {
   filter: brightness(0.92);
 }
 
-.timer-panel.player-1 {
-  background: #f5f0b0;
-}
-
-.timer-panel.player-2 {
-  background: #d8d8c0;
-}
-
 .timer-panel.active {
-  filter: brightness(0.95);
+  background: #f0e060;
 }
 
-.timer-panel.active.player-1 {
-  background: #f0e870;
-}
-
-.timer-panel.active.player-2 {
-  background: #c8c8a0;
+.timer-panel.inactive {
+  background: #e0e0ea;
 }
 
 .timer-panel.time-up {
