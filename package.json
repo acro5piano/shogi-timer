@@ -1,0 +1,26 @@
+{
+  "name": "shogi-timer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "swr": "^2.3.3",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  },
+  "packageManager": "pnpm@10.28.0"
+}
