@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { beepLastCount, beepShort } from "./sound";
+import { beepLastCount, beepShort, beepTurnChange } from "./sound";
 
 type Player = 1 | 2;
 
@@ -48,6 +48,7 @@ export const useGameStore = create<GameState>()(
         if (state.gameStatus === "idle") {
           // First move: the tapped player ends their turn, opponent becomes active
           const nextPlayer: Player = player === 1 ? 2 : 1;
+          beepTurnChange();
           set({
             gameStatus: "running",
             activePlayer: nextPlayer,
@@ -59,6 +60,7 @@ export const useGameStore = create<GameState>()(
         // Only the active player can switch
         if (state.activePlayer !== player) return;
 
+        beepTurnChange();
         const nextPlayer: Player = player === 1 ? 2 : 1;
 
         // Reset byoyomi for the player who just moved (if they were in byoyomi)
@@ -101,11 +103,11 @@ export const useGameStore = create<GameState>()(
           set({ [byoyomiKey]: newByoyomi });
 
           // Byoyomi sounds
-          if (newByoyomi > 0 && newByoyomi <= 10 && newByoyomi % 10 === 0) {
-            // Every 10 seconds (50, 40, 30, 20, 10)
+          if (newByoyomi > 10 && newByoyomi % 10 === 0) {
+            // Every 10 seconds (50, 40, 30, 20)
             beepShort();
-          } else if (newByoyomi > 0 && newByoyomi < 10) {
-            // Last count: every second under 10
+          } else if (newByoyomi > 0 && newByoyomi <= 10) {
+            // Last 10 seconds: every second
             beepLastCount();
           }
         }
