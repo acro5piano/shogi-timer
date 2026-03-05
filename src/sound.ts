@@ -48,3 +48,7 @@ export function beepShort(): void {
 export function beepLastCount(): void {
   beep(1000, 150);
 }
+
+export function beepTurnChange(): void {
+  beep(600, 60);
+}
